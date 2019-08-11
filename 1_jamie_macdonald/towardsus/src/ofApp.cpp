@@ -4,8 +4,6 @@
 
 void ofApp::setup(){
     ofSetBackgroundColor(0, 0, 0, 255);
-    frequency = 10;
-    depth = 0;
     
     // Calling the object's setup method
     for(int i=0; i<NBALLS; i++){
@@ -25,12 +23,4 @@ void ofApp::draw(){
     for(int i=0; i<NBALLS; i++){
         groupOfBalls[i].draw();
     }
-    
-    // TODO: Refactor - Need to take an item from 'groupOfBalls' array and display it on a random interval
-    //    if (floor(ofRandomf() * frequency) == 0) {
-    //        depth++;
-    //        // path.scaleSpeed = 0;
-    //        path.draw();
-    //        path.close();
-    //    }
 }

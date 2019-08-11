@@ -35,6 +35,7 @@ public: // place public functions or variables declarations here
     float colMin;
     float colMax;
     float colVariance;
+    float frequency;
     ofColor color;
     
     Ball(); // Constructor - used to initialize an object, if no properties are passed the program sets them to the default value

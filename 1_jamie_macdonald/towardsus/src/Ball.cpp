@@ -3,17 +3,17 @@ Ball::Ball(){}
 
 void Ball::setup(){
     ofEnableAlphaBlending();
-    colMin = 0;
+    colMin = 64;
     colMax = 255;
     fadeOut = 0.53;
+    frequency = 32;
     scale = 25;
-    scaleMax = 800;
-    x = -50; // Position the circle offscreen
+    scaleMax = 300;
+    x = -50;
     y = -50;
-    alpha = 255;
+    alpha = 64;
     colVariance = colMax - colMin;
-    color.set(255, 0, 0, alpha);
-    color.setBrightness(getNooCol());
+    color.set(getNooCol(), getNooCol(), getNooCol(), alpha);
     scaleSpeed = getScaleUpSpeed();
     leftRightSpeed = getLeftRightSpeed();
     hRad = getHRad();
@@ -23,22 +23,24 @@ void Ball::setup(){
 }
 
 void Ball::update(){
-    // Expand
-    lr += leftRightSpeed;
-    hRad += hRadInc;
-    vRad += vRadInc;
-    x = ofGetWindowWidth() / 2 + hRad + sin(lr * PI/180);
-    y = ofGetWindowHeight() / 2 + vRad + cos(lr * PI/180);
-    scale *= scaleSpeed;
+    if (floor(ofRandomf() * frequency) == 0) {
+        lr += leftRightSpeed;
+        hRad += hRadInc;
+        vRad += vRadInc;
+        x = ofGetWidth() / 2 + hRad + sin(lr * PI/180);
+        y = ofGetHeight() / 2 + vRad + cos(lr * PI/180);
+        scale *= scaleSpeed;
+    }
 }
 
 void Ball::draw(){
     if (scale < scaleMax) {
         alpha *= fadeOut;
         ofSetColor(color);
+        ofSetCircleResolution(100);
         ofDrawCircle(x, y, scale);
     } else {
-        // TODO: If alpha goes below 3 then destroy the circle
+        setup();
     }
 }
 
@@ -47,25 +49,25 @@ float Ball::getNooCol(void) {
 };
 
 float Ball::getHRad(void) {
-    return 4 + ofRandomf();
+    return ofRandom(-20, 20);;
 };
 
 float Ball::getVRad(void) {
-    return 4 + ofRandomf();
+    return 0;
 };
 
 float Ball::getHRadInc(void) {
-    return 0.1;
+    return ofRandom(-20, 20);
 };
 
 float Ball::getVRadInc(void) {
-    return 0.1;
+    return 0;
 };
 
 float Ball::getLeftRightSpeed(void) {
-    return 5 + ofRandomf();
+    return 1 + ofRandomf();
 };
 
 float Ball::getScaleUpSpeed(void) {
-    return 1.001; // 1.02;
+    return 1.2;
 };

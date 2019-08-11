@@ -9,8 +9,8 @@ class ofApp : public ofBaseApp{
 
 	public:
         Ball groupOfBalls[NBALLS];
-        float frequency; // TODO: Implement or remove
-        float depth; // TODO: Implement or remove
+//        float frequency; // TODO: Implement or remove
+//        float depth; // TODO: Implement or remove
 		void setup();
 		void update();
 		void draw();
